@@ -90,6 +90,12 @@ public class TootedController : ControllerBase // Peab pärima ControllerBase
         _tooted.Add(toode);
         return _tooted;
     }
+    [HttpPost("lisa")]
+    public List<Toode> Add([FromBody] Toode toode)
+    {
+        _tooted.Add(toode);
+        return _tooted;
+    }
 
     [HttpGet("hind-dollaritesse/{kurss}")]
     public List<Toode> Dollaritesse(double kurss)
