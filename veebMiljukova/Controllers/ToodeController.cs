@@ -21,7 +21,7 @@ namespace veebMiljukova.Controllers
         [HttpGet("muuda-aktiivsust")]
         public Toode MuudaAktiivsust()
         {
-            _toode.IsActive = !_toode.IsActive; 
+            _toode.IsActive = !_toode.IsActive;
             return _toode;
         }
 
@@ -29,7 +29,7 @@ namespace veebMiljukova.Controllers
         [HttpGet("muuda-nime/{uusNimi}")]
         public Toode MuudaNime(string uusNimi)
         {
-            _toode.Name = uusNimi; 
+            _toode.Name = uusNimi;
             return _toode;
         }
 
@@ -37,7 +37,7 @@ namespace veebMiljukova.Controllers
         [HttpGet("muuda-hinda-kordajaga/{kordaja}")]
         public Toode MuudaHindaKordajaga(double kordaja)
         {
-            _toode.Price *= kordaja; 
+            _toode.Price *= kordaja;
             return _toode;
         }
     }
