@@ -61,7 +61,7 @@ public class TootedController : ControllerBase // Peab pärima ControllerBase
     }
 
     // Varasemad otspunktid
-    [HttpGet("kustuta/{index}")]
+    [HttpDelete("kustuta/{index}")]
     public List<Toode> Delete(int index)
     {
         _tooted.RemoveAt(index);
@@ -75,7 +75,7 @@ public class TootedController : ControllerBase // Peab pärima ControllerBase
         return "Kustutatud!";
     }
 
-    [HttpGet("lisa/{id}/{nimi}/{hind}/{aktiivne}")]
+    [HttpPost("lisa/{id}/{nimi}/{hind}/{aktiivne}")]
     public List<Toode> Add(int id, string nimi, double hind, bool aktiivne)
     {
         Toode toode = new Toode(id, nimi, hind, aktiivne);
@@ -83,19 +83,19 @@ public class TootedController : ControllerBase // Peab pärima ControllerBase
         return _tooted;
     }
 
-    [HttpGet("lisa")]
-    public List<Toode> Add2([FromQuery] int id, [FromQuery] string nimi, [FromQuery] double hind, [FromQuery] bool aktiivne)
-    {
-        Toode toode = new Toode(id, nimi, hind, aktiivne);
-        _tooted.Add(toode);
-        return _tooted;
-    }
-    [HttpPost("lisa")]
-    public List<Toode> Add([FromBody] Toode toode)
-    {
-        _tooted.Add(toode);
-        return _tooted;
-    }
+    //[HttpGet("lisa")]
+    //public List<Toode> Add2([FromQuery] int id, [FromQuery] string nimi, [FromQuery] double hind, [FromQuery] bool aktiivne)
+    //{
+    //    Toode toode = new Toode(id, nimi, hind, aktiivne);
+    //    _tooted.Add(toode);
+    //    return _tooted;
+    //}
+    //[HttpPost("lisa")]
+    //public List<Toode> Add([FromBody] Toode toode)
+    //{
+    //    _tooted.Add(toode);
+    //    return _tooted;
+    //}
 
     [HttpGet("hind-dollaritesse/{kurss}")]
     public List<Toode> Dollaritesse(double kurss)
