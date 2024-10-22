@@ -21,12 +21,14 @@ namespace veebMiljukova.Controllers
             var responseBody = await response.Content.ReadAsStringAsync();
             return Content(responseBody, "application/json");
         }
-        //[HttpGet("Smartpost")]
-        //public async Task<IActionResult> GetParcelMachinesSmartPost()
-        //{
-        //    var response = await _httpClient.GetAsync("https://www.smartpost.ee/places.json");
-        //    var responseBody = await response.Content.ReadAsStringAsync();
-        //    return Content(responseBody, "application/json");
-        //}
+
+        //не работает сайт с расположениями
+        [HttpGet("Smartpost")]
+        public async Task<IActionResult> GetParcelMachinesSmartPost()
+        {
+            var response = await _httpClient.GetAsync("https://www.smartpost.ee/places.json");
+            var responseBody = await response.Content.ReadAsStringAsync();
+            return Content(responseBody, "application/json");
+        }
     }
 }
