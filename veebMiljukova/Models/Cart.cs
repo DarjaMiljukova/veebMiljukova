@@ -2,7 +2,7 @@
 
 namespace veebMiljukova.Models
 {
-    public class Ostukorv
+    public class Cart
     {
         public int Id { get; set; }
         public int KasutajaId { get; set; }

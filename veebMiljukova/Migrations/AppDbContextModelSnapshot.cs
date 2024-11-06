@@ -22,6 +22,22 @@ namespace veebMiljukova.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("veebMiljukova.Models.Cart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("KasutajaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Ostukorvid");
+                });
+
             modelBuilder.Entity("veebMiljukova.Models.Kasutaja", b =>
                 {
                     b.Property<int>("Id")
@@ -51,22 +67,6 @@ namespace veebMiljukova.Migrations
                     b.ToTable("Kasutajad");
                 });
 
-            modelBuilder.Entity("veebMiljukova.Models.Ostukorv", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("KasutajaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Ostukorvid");
-                });
-
             modelBuilder.Entity("veebMiljukova.Models.Toode", b =>
                 {
                     b.Property<int>("Id")
@@ -74,6 +74,9 @@ namespace veebMiljukova.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CartId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -82,27 +85,24 @@ namespace veebMiljukova.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OstukorvId")
-                        .HasColumnType("int");
-
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OstukorvId");
+                    b.HasIndex("CartId");
 
                     b.ToTable("Tooted");
                 });
 
             modelBuilder.Entity("veebMiljukova.Models.Toode", b =>
                 {
-                    b.HasOne("veebMiljukova.Models.Ostukorv", null)
+                    b.HasOne("veebMiljukova.Models.Cart", null)
                         .WithMany("Tooted")
-                        .HasForeignKey("OstukorvId");
+                        .HasForeignKey("CartId");
                 });
 
-            modelBuilder.Entity("veebMiljukova.Models.Ostukorv", b =>
+            modelBuilder.Entity("veebMiljukova.Models.Cart", b =>
                 {
                     b.Navigation("Tooted");
                 });

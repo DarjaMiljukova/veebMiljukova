@@ -1,14 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using veebMiljukova.Models;
 
-
 var builder = WebApplication.CreateBuilder(args);
+
+// Добавление CORS политики
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost",
+        builder => builder
+            .WithOrigins("http://localhost:3000") // Указываем фронтенд порт
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+});
 
 // Добавить сервисы
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddHttpClient();
 
 // Настройка DbContext для работы с миграциями
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -24,11 +33,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors(options => options
-    .WithOrigins("*")
-    .AllowAnyMethod()
-    .AllowAnyHeader()
-);
+
+// Применение CORS политики
+app.UseCors("AllowLocalhost");
+
 app.UseAuthorization();
+
 app.MapControllers();
+
 app.Run();

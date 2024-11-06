@@ -48,22 +48,22 @@ namespace veebMiljukova.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    OstukorvId = table.Column<int>(type: "int", nullable: true)
+                    CartId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tooted", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tooted_Ostukorvid_OstukorvId",
-                        column: x => x.OstukorvId,
+                        name: "FK_Tooted_Ostukorvid_CartId",
+                        column: x => x.CartId,
                         principalTable: "Ostukorvid",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tooted_OstukorvId",
+                name: "IX_Tooted_CartId",
                 table: "Tooted",
-                column: "OstukorvId");
+                column: "CartId");
         }
 
         /// <inheritdoc />
